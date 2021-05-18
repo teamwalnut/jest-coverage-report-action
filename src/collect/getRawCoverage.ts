@@ -27,7 +27,7 @@ export const getRawCoverage = async (
         recursive: true,
     });
 
-    await exec('npm i', undefined, {
+    await exec('yarn', undefined, {
         cwd: workingDirectory,
     });
 
