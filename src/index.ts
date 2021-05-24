@@ -27,6 +27,7 @@ async function run() {
             componentName
         ] = argv.slice(2);
 
+        console.log("############### " + componentName)
         const coverageThreshold = coverageThresholdStr
             ? parseFloat(coverageThresholdStr)
             : undefined;
