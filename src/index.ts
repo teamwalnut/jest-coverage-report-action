@@ -21,10 +21,10 @@ async function run() {
 
         const [
             token,
+            componentName,
             testScript,
             coverageThresholdStr,
             workingDirectory,
-            componentName
         ] = argv.slice(2);
 
         console.log("############### " + componentName)
