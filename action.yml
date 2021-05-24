@@ -1,26 +1,29 @@
-name: 'Jest coverage report'
-description: 'Track your code coverage in each pull request.'
-author: 'Artiom Tretjakovas <artiom.tretjakovas2@gmail.com>'
+name: "Jest coverage report"
+description: "Track your code coverage in each pull request."
+author: "Artiom Tretjakovas <artiom.tretjakovas2@gmail.com>"
 branding:
-    icon: 'activity'
-    color: 'gray-dark'
+    icon: "activity"
+    color: "gray-dark"
 inputs:
     github_token:
         required: true
-        description: 'A github access token'
+        description: "A github access token"
     test_script:
         required: false
-        description: 'A custom npm script to get coverage'
+        description: "A custom npm script to get coverage"
         default: npx jest --silent --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
     threshold:
         required: false
-        description: 'Coverage threshold. If total coverage is less than threshold, PR will be rejected'
+        description: "Coverage threshold. If total coverage is less than threshold, PR will be rejected"
     working_directory:
         required: false
-        description: 'Custom working directory'
+        description: "Custom working directory"
+    component_name:
+        required: true
+        description: "The component name"
 runs:
-    using: 'docker'
-    image: 'Dockerfile'
+    using: "docker"
+    image: "Dockerfile"
     args:
         - ${{ inputs.github_token }}
         - ${{ inputs.test_script }}

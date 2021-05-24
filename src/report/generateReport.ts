@@ -4,7 +4,7 @@ import { getOctokit } from '@actions/github';
 import { fetchPreviousReport } from './fetchPreviousReport';
 import { ParsedCoverageDetails } from '../collect/parseCoverageDetails';
 import { ParsedCoverageSummary } from '../collect/parseCoverageSummary';
-import { MESSAGE_HEADING } from '../constants/MESSAGE_HEADING';
+import { headingGenerator } from '../constants/messageHeading';
 import { getFormattedCoverage } from '../format/getFormattedCoverage';
 import { getFormattedFailReason } from '../format/getFormattedFailReason';
 
@@ -29,9 +29,10 @@ export const generateReport = async (
     coverageThreshold: number | undefined,
     repo: { owner: string; repo: string },
     pr: { number: number },
-    octokit: ReturnType<typeof getOctokit>
+    octokit: ReturnType<typeof getOctokit>,
+    componentName: string
 ) => {
-    const previousReport = await fetchPreviousReport(octokit, repo, pr);
+    const previousReport = await fetchPreviousReport(octokit, repo, pr, componentName);
 
     try {
         let reportContent = '';
@@ -55,7 +56,8 @@ export const generateReport = async (
                     baseReport.summary,
                     headReport.details,
                     baseReport.details,
-                    coverageThreshold
+                    coverageThreshold,
+                    componentName
                 );
             } else {
                 console.log(
@@ -93,13 +95,14 @@ export const generateReport = async (
                         baseReport.summary,
                         headReport.details,
                         baseReport.details,
-                        coverageThreshold
+                        coverageThreshold,
+                        componentName
                     )
                 );
             }
         }
 
-        const reportBody = [MESSAGE_HEADING, reportContent].join('\n');
+        const reportBody = [headingGenerator(componentName), reportContent].join('\n');
 
         if (previousReport) {
             await octokit.issues.updateComment({

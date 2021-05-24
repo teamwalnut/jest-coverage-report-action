@@ -10,7 +10,7 @@ import { getStatusOfPercents } from '../utils/getStatusOfPercents';
 export const formatCoverageSummary = (
     headSummary: ParsedCoverageSummary,
     baseSummary: ParsedCoverageSummary,
-    threshold: number | undefined
+    threshold: number | undefined,
 ): string =>
     formatTable(
         summary.heading,

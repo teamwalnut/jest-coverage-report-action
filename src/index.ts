@@ -24,6 +24,7 @@ async function run() {
             testScript,
             coverageThresholdStr,
             workingDirectory,
+            componentName
         ] = argv.slice(2);
 
         const coverageThreshold = coverageThresholdStr
@@ -70,7 +71,8 @@ async function run() {
             coverageThreshold,
             repo,
             pull_request,
-            octokit
+            octokit,
+            componentName
         );
     } catch (error) {
         setFailed(error.message);

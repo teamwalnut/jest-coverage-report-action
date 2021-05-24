@@ -8,7 +8,8 @@ export const getFormattedCoverage = (
     baseSummary: ParsedCoverageSummary,
     headDetails: ParsedCoverageDetails,
     baseDetails: ParsedCoverageDetails,
-    threshold: number | undefined
+    threshold: number | undefined,
+    componentName: string
 ): string =>
     [
         formatCoverageSummary(headSummary, baseSummary, threshold),
